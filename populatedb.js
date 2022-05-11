@@ -24,8 +24,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var categories = []
 var components = []
-var books = []
-var bookinstances = []
 
 function categoryCreate(title, description, cb) {
   categorydetail = { title: title }
@@ -50,7 +48,7 @@ function componentCreate(
     category,
     price,
     stock,
-    url,
+    link,
     cb
     ) {
   var component = new Component({ 
@@ -59,7 +57,7 @@ function componentCreate(
     category: category,
     price: price,
     stock: stock,
-    url: url,
+    link: link
     });
        
   component.save(function (err) {
@@ -74,7 +72,7 @@ function componentCreate(
 }
 
 function createCategories(cb) {
-    async.series([
+    async.parallel([
         function(callback) {
           categoryCreate(
             'CPU', 
@@ -141,13 +139,13 @@ function createComponents(cb) {
     async.parallel([
         function(callback) {
           componentCreate(
-              'Intel Core i9-12900K', 
-              ['Core Count: 16', 'Core Clock: 3.2 GHz', 'Boost Clock: 5.2 GHz', 'Integrated Graphics: Intel UHD Graphics 770'],
+              'Intel Core i9-12900K',  
+              'Core Count: 16, Core Clock: 3.2 GHz, Boost Clock: 5.2 GHz, Integrated Graphics: Intel UHD Graphics 770',
               categories[0],
               599.99,
-              673,
-              'https://www.amazon.com/dp/B09FXDLX95?tag=pcpapi-20&linkCode=ogi&th=1&psc=1',
-              callback 
+              420,
+              'https://www.amazon.com/Intel-i9-12900K-Desktop-Processor-Unlocked/dp/B09FXDLX95',
+              callback
               );
         },
         ],
