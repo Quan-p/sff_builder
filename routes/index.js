@@ -7,11 +7,35 @@ var component_controller = require('../controllers/componentController');
 
 // redirect to homepage
 router.get('/', function (req, res) {
-  res.redirect('category_list');
+  res.redirect('list');
 });
 
 // Category routes //
-router.get('/category_list', category_controller.category_list);
+router.get('/list', category_controller.list);
+
+// GET request for creating Category. NOTE This must come before route for id (i.e. display category).
+router.get("/category/create", category_controller.category_create_get);
+
+// POST request for creating Category.
+router.post("/category/create", category_controller.category_create_post);
+
+// GET request to delete Category.
+router.get("/category/:id/delete", category_controller.category_delete_get);
+
+// POST request to delete Category.
+router.post("/category/:id/delete", category_controller.category_delete_post);
+
+// GET request to update Category.
+router.get("/category/:id/update", category_controller.category_update_get);
+
+// POST request to update Category.
+router.post("/category/:id/update", category_controller.category_update_post);
+
+// GET request for one Category.
+router.get("/category/:id", category_controller.category_detail);
+
+// GET request for list of all Categories.
+router.get("/categories", category_controller.category_list);
 
 // Component routes //
 
