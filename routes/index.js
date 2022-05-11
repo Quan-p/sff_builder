@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
   res.redirect('list');
 });
 
-// Category routes //
+// CATEGORY ROUTES //
 router.get('/list', category_controller.list);
 
 // GET request for creating Category. NOTE This must come before route for id (i.e. display category).
@@ -37,7 +37,30 @@ router.get("/category/:id", category_controller.category_detail);
 // GET request for list of all Categories.
 router.get("/categories", category_controller.category_list);
 
-// Component routes //
+// COMPONENT ROUTES //
+// GET request for creating component. NOTE This must come before route for id (i.e. display category).
+router.get("/component/create", component_controller.component_create_get);
+
+// POST request for creating Components.
+router.post("/component/create", component_controller.component_create_post);
+
+// GET request to delete Components.
+router.get("/component/:id/delete", component_controller.component_delete_get);
+
+// POST request to delete Components.
+router.post("/component/:id/delete", component_controller.component_delete_post);
+
+// GET request to update Components.
+router.get("/component/:id/update", component_controller.component_update_get);
+
+// POST request to update Components.
+router.post("/component/:id/update", component_controller.component_update_post);
+
+// GET request for one Components.
+router.get("/component/:id", component_controller.component_detail);
+
+// GET request for list of all Components.
+router.get("/components", component_controller.component_list);
 
 
 module.exports = router;
