@@ -1,9 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.redirect('/catalog');;
+//Require controller modules
+var category_controller = require('../controllers/categoryController');
+var component_controller = require('../controllers/componentController');
+
+// redirect to homepage
+router.get('/', function (req, res) {
+  res.redirect('category_list');
 });
+
+// Category routes //
+router.get('/category_list', category_controller.category_list);
+
+// Component routes //
+
 
 module.exports = router;
