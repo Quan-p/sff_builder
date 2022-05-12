@@ -1,7 +1,10 @@
 var Category = require('../models/category');
+var Components = require('../models/component');
+var async = require('async');
 
 exports.list = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: CATEGORY LIST');
+    
+    res.render('list', { title: 'Part List' });
 };
 
 // Display list of all categories.
