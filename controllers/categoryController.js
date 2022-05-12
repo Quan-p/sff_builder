@@ -9,7 +9,7 @@ exports.list = function(req, res, next) {
 
 // Display list of all categories.
 exports.category_list = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: Category list');
+    res.render('category_list', { title: 'Part List' });
 };
 
 // Display detail page for a specific category.
