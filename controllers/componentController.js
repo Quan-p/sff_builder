@@ -2,7 +2,14 @@ var Component = require('../models/component');
 
 // Display list of all components.
 exports.component_list = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: COMPONENT LIST');
+    Component.find({}, 'name')
+      .sort({name : 1})
+    //   .populate('author')
+      .exec(function (err, list_component) {
+        if (err) { return next(err); }
+        //Successful, so render
+    res.render('component_list', { title: 'Component List', component_list: list_component });
+      });
 };
 
 // Display detail page for a specific component.
