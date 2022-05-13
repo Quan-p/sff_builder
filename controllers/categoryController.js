@@ -21,7 +21,33 @@ exports.category_list = function(req, res, next) {
 
 // Display detail page for a specific category.
 exports.category_detail = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: Category detail: ' + req.params.id);
+    async.parallel({
+        category: function(callback) {
+            Category.findById(req.params.id)
+                .populate('title')
+                .populate('description')
+                .exec(callback);
+        }, 
+        // book_instance: function(callback) {
+
+        //   BookInstance.find({ 'book': req.params.id })
+        //   .exec(callback);
+        // },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.category==null) { // No results.
+            var err = new Error('Category not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Successful, so render.
+        res.render('category_detail', { 
+            title: results.category.title, 
+            description: results.category.description, 
+            //book_instances: results.book_instance 
+        } );
+    });
+
 };
 
 // Display category create form on GET.
