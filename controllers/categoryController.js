@@ -9,7 +9,14 @@ exports.list = function(req, res, next) {
 
 // Display list of all categories.
 exports.category_list = function(req, res, next) {
-    res.render('category_list', { title: 'Part List' });
+    Category.find({}, 'title')
+      .sort({title : 1})
+    //   .populate('author')
+      .exec(function (err, category_list) {
+        if (err) { return next(err); }
+        //Successful, so render
+    res.render('category_list', { title: 'Category List', category_list });
+      });
 };
 
 // Display detail page for a specific category.
