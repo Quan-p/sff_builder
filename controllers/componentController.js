@@ -1,11 +1,11 @@
-var Component = require('../models/component');
+var Components = require('../models/component');
+var Category = require('../models/component');
 var async = require('async');
 
 // Display list of all components.
 exports.component_list = function(req, res, next) {
-    Component.find({}, 'name')
+    Components.find({}, 'name')
       .sort({name : 1})
-    //   .populate('author')
       .exec(function (err, list_component) {
         if (err) { return next(err); }
         //Successful, so render
@@ -15,22 +15,40 @@ exports.component_list = function(req, res, next) {
 
 // Display detail page for a specific component.
 exports.component_detail = function(req, res, next) {
-        Component.findById(req.params.id)
-            .populate('name')
-            .populate('description')
-            .populate('category')
-            .populate('price')
-            .populate('stock')
-            .populate('link')
-            .exec(function (err, detail_component) {
-                if (err) { return next(err); }
-        
+    async.parallel({
+        component: function(callback) {
+            Components.findById(req.params.id)
+                .populate('name')
+                .populate('description')
+                .populate('category')
+                .populate('price')
+                .populate('stock')
+                .populate('link')
+                .exec(callback);
+        },
+        category: function(callback) {
+            Category.find({ 'title': req.params.id })
+            //.populate('title')
+            .exec(callback);
+        }, 
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.component==null) { // No results.
+            var err = new Error('Component not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Successful, so render.
         res.render('component_detail', { 
-            component_detail: detail_component, 
-            // description: results.component.description, 
-            // category: results.component.category
+            name: results.component.name, 
+            description: results.component.description, 
+            category: results.component.category,
+            price: results.component.price, 
+            stock: results.component.stock, 
+            link: results.component.link
         } );
     });
+
 };
 
 

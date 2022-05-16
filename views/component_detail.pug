@@ -1,17 +1,22 @@
 extends layout 
 
 block content
-    h1 #{component_detail.name} #{title}
+    h1 #{name} #{title}
     -
-        var list = component_detail.description;
+        var list = description;
         var listArr = list.split(',');
-    h2 Features 
+    h3 Category
+    p #{category.title}
+    h3 Features 
     ul(class='feature-list')
         each feature in listArr 
             li= feature
-    p Price $#{component_detail.price}
-    p Stock #{component_detail.stock}
-    a(href=component_detail.link) Buy
+    p Price $#{price}
+    p Stock #{stock}
+    a(href=link) Buy
+    
+    
+    
 
       
     
