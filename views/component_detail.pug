@@ -1,0 +1,17 @@
+extends layout 
+
+block content
+    h1 #{component_detail.name} #{title}
+    -
+        var list = component_detail.description;
+        var listArr = list.split(',');
+    h2 Features 
+    ul(class='feature-list')
+        each feature in listArr 
+            li= feature
+    p Price $#{component_detail.price}
+    p Stock #{component_detail.stock}
+    a(href=component_detail.link) Buy
+
+      
+    

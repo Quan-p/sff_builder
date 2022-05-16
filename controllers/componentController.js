@@ -1,4 +1,5 @@
 var Component = require('../models/component');
+var async = require('async');
 
 // Display list of all components.
 exports.component_list = function(req, res, next) {
@@ -14,8 +15,25 @@ exports.component_list = function(req, res, next) {
 
 // Display detail page for a specific component.
 exports.component_detail = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: component detail: ' + req.params.id);
+        Component.findById(req.params.id)
+            .populate('name')
+            .populate('description')
+            .populate('category')
+            .populate('price')
+            .populate('stock')
+            .populate('link')
+            .exec(function (err, detail_component) {
+                if (err) { return next(err); }
+        
+        res.render('component_detail', { 
+            component_detail: detail_component, 
+            // description: results.component.description, 
+            // category: results.component.category
+        } );
+    });
 };
+
+
 
 // Display component create form on GET.
 exports.component_create_get = function(req, res, next) {
