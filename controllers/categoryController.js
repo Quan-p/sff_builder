@@ -28,11 +28,11 @@ exports.category_detail = function(req, res, next) {
                 .populate('description')
                 .exec(callback);
         }, 
-        // book_instance: function(callback) {
-
-        //   BookInstance.find({ 'book': req.params.id })
-        //   .exec(callback);
-        // },
+        category_components: function(callback) {
+          Components.find({ category: req.params.id })
+          .populate('name')
+          .exec(callback);
+        },
     }, function(err, results) {
         if (err) { return next(err); }
         if (results.category==null) { // No results.
@@ -44,6 +44,7 @@ exports.category_detail = function(req, res, next) {
         res.render('category_detail', { 
             title: results.category.title, 
             description: results.category.description, 
+            category_components: results.category_components
             //book_instances: results.book_instance 
         } );
     });
