@@ -3,7 +3,8 @@ extends layout
 block content  
     h1= title 
     p This is a list of all the components.
-
+    p 
+    a(href='/component/create') Create Category
     ul
     each component in component_list
       li
