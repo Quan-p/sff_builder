@@ -1,5 +1,5 @@
 var Components = require('../models/component');
-var Category = require('../models/component');
+var Category = require('../models/category');
 var async = require('async');
 
 // Display list of all components.
@@ -55,7 +55,22 @@ exports.component_detail = function(req, res, next) {
 
 // Display component create form on GET.
 exports.component_create_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: component create GET');
+    async.parallel(
+        {
+            categories: function(callback) {
+                Category.find(callback);
+            }
+        },
+        function(err, results) {
+            if(err) next(err);
+
+            res.render('component_form', {
+                title: 'Create a new pc component',
+                categories: results.categories
+            });
+        }
+    )
+    
 };
 
 // Handle component create on POST.
