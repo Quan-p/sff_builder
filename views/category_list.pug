@@ -3,7 +3,8 @@ extends layout
 block content  
     h1= title 
     p This is a list of all the categories
-
+    p 
+    a(href='/category/create') Create Category
     ul
     each category in category_list
       li
