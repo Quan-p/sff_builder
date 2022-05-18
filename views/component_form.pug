@@ -6,7 +6,7 @@ block content
   form(method='POST' action='')
     div.form-group
         label(for='name') Name:
-        input#name.form-control(type='text' name='name' required='true' value=(component == 'undefined' ? '' : component.name) )
+        input#name.form-control(type='text' name='name' required='true' value=(undefined == component ? '' : component.name) )
     div.form-group
         label(for='category') Category: 
         select#category(type='select' name='category' required='true')
@@ -20,8 +20,8 @@ block content
         label(for='stock') Stock:
         input#stock.form-control(type='number' name='stock' required='true' min=0 value=0)
     div.form-group
-        label(for='features') Features:
-        textarea(name="features", id='description', cols="30", rows="10", maxlength: 500)
+        label(for='description') Features:
+        textarea(name="description", id='description', cols="30", rows="10", maxlength: 500)
     div.form-group
         label(for='link') Link:
         input#link.form-control(type='text' name='link' required='true')
