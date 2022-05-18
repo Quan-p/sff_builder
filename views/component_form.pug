@@ -6,22 +6,25 @@ block content
   form(method='POST' action='')
     div.form-group
         label(for='name') Name:
-        input#name-input.form-control(type='text' name='name' required='true' value=(undefined===component ? '' : component.name) )
+        input#name.form-control(type='text' name='name' required='true' value=(component == 'undefined' ? '' : component.name) )
     div.form-group
         label(for='category') Category: 
-        select(type='select' name='category' required='true')
+        select#category(type='select' name='category' required='true')
             each category in categories
-                option(value=category.id) #{category.title}
+                option(value=category._id)= category.title
     div.form-group
         label(for='price') Price: #[br]
         div
             span $ #[input#price-input(type='number' name='price' step=0.01 required='true' min=0 value=0)]
     div.form-group
         label(for='stock') Stock:
-        input#stock-input.form-control(type='number' name='stock' required='true' value=0)
+        input#stock.form-control(type='number' name='stock' required='true' min=0 value=0)
     div.form-group
         label(for='features') Features:
         textarea(name="features", id='description', cols="30", rows="10", maxlength: 500)
+    div.form-group
+        label(for='link') Link:
+        input#link.form-control(type='text' name='link' required='true')
     button.btn.btn-primary(type='submit') Submit
   if errors
     ul
