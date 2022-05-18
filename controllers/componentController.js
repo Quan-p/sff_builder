@@ -1,5 +1,6 @@
 var Components = require('../models/component');
 var Category = require('../models/category');
+const { body,validationResult, sanitize } = require('express-validator');
 var async = require('async');
 
 // Display list of all components.
@@ -74,9 +75,73 @@ exports.component_create_get = function(req, res, next) {
 };
 
 // Handle component create on POST.
-exports.component_create_post = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: component create POST');
-};
+exports.component_create_post = [
+    // Validate and sanitize fields.
+    body('name', "Name must be at least 3 characters in length")
+        .trim()
+        //.isLength({ min: 3 })
+        .escape(),
+    body('category', "Category must not be empty")
+        .trim()
+        .escape(),
+    body("price", "Price must be between $0 and $999999").isFloat({
+        min: 0,
+        max: 999999,
+    }),
+    body('stock', "Stock cannot be lower than 0")
+        .isInt({ min: 0, max: 99999 }),
+    body('description', "Name must be at least 3 characters in length")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),    
+    body('link')
+        .trim()
+        .isLength({ min: 1 }),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        var component = new Components(
+            {
+                name: req.body.name,
+                category: req.body.category,
+                price: req.body.price,
+                stock: req.body.stock,
+                description: req.body.description,
+                link: req.body.link
+            });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values/errors messages.
+            async.parallel({
+                categories: function(callback) {
+                    Category.find(callback);
+                }
+            }, 
+            function (err, results) {
+                if (err) next(err);
+      
+                res.render("component_form", {
+                  title: "Create a computer part",
+                  categories: results.categories,
+                  component: component,
+                  errors: errors.array(),
+                });
+            }
+            )
+        }
+        else {
+            // Data from form is valid. Save component
+            component.save(function (err) {
+                if (err) { return next(err); }
+                // Successful - redirect to new author record.
+                res.redirect(component.url);
+            });
+        }
+}];
 
 // Display component delete form on GET.
 exports.component_delete_get = function(req, res, next) {
