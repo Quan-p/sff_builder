@@ -122,6 +122,36 @@ exports.category_delete_get = function(req, res, next) {
 
 // Handle category delete on POST.
 exports.category_delete_post = function(req, res, next) {
+    async.parallel({
+        category: function(callback) {
+            Category.findById(req.body.categryid).exec(callback)
+        },
+        category_components: function(callback) {
+            Components.find({ 'category':req.body.categoryid }).exec(callback)
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        // Success
+        if (results.category_components.length > 0) {
+            // Category still has components so render delete page again
+            res.render('category_delete', {
+                title: 'Delete Category',
+                category: results.category,
+                category_components: results.category_components
+            });
+            return;
+        }
+        else {
+            // Category has no components so delete
+            Category.findByIdAndRemove(
+                req.body.categoryid,
+                function deleteCategory(err) {
+                    if(err) { return next(err); }
+                    res.redirect('/categories')
+                })
+        }
+    }
+    )
     res.send('NOT IMPLEMENTED: Category delete POST');
 };
 
