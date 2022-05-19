@@ -45,8 +45,8 @@ exports.category_detail = function(req, res, next) {
         res.render('category_detail', { 
             title: results.category.title, 
             description: results.category.description, 
-            category_components: results.category_components
-            //book_instances: results.book_instance 
+            category_components: results.category_components,
+            category: results.category,
         } );
     });
 
@@ -99,7 +99,25 @@ exports.category_create_post = [
 
 // Display category delete form on GET.
 exports.category_delete_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: Category delete GET');
+    async.parallel({
+        category: function(callback) {
+            Category.findById(req.params.id).exec(callback)
+        },
+        category_components: function(callback) {
+            Components.find({ 'category': req.params.id }).exec(callback)
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.category==null) {
+            res.redirect('/categories');
+        }
+        res.render('category_delete', { 
+            title: 'Delete Category',
+            category: results.category,
+            category_components: results.category_components 
+        });
+    }
+    )
 };
 
 // Handle category delete on POST.
