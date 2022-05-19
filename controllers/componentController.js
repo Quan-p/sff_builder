@@ -41,6 +41,7 @@ exports.component_detail = function(req, res, next) {
         }
         // Successful, so render.
         res.render('component_detail', { 
+            component: results.component,
             name: results.component.name, 
             description: results.component.description, 
             category: results.component.category,
@@ -145,7 +146,21 @@ exports.component_create_post = [
 
 // Display component delete form on GET.
 exports.component_delete_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: component delete GET');
+    async.parallel({
+        component: function(callback) {
+            Components.findById(req.params.id).exec(callback)
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.component==null) {
+            res.redirect('/components');
+        }
+        res.render('component_delete', { 
+            title: 'Delete Component',
+            component: results.component,
+        });
+    }
+    )
 };
 
 // Handle component delete on POST.
