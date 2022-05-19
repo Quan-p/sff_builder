@@ -2,3 +2,11 @@ extends layout
 
 block content 
     h1= title
+    h3= components.name
+
+    p Do you really want to delete this component?
+
+    form(method='POST' action='')
+        div.form-group
+            input#componentid.form-control(type='hidden', name='componentid', required='true', value=components._id)
+        button.btn.delete-btn(type='submit') Delete
