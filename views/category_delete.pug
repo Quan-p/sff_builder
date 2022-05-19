@@ -2,3 +2,21 @@ extends layout
 
 block content
     h1= title
+    h3= category.title
+
+    if category_components.length 
+
+        p #[strong Delete the following components before attempting to delete this category.]
+        h4 Components 
+        dl 
+        each component in category_components 
+            dt 
+                a(href=component.url) #{component.name} 
+    
+    else 
+        p Do you really want to delete this category?
+
+        form(method='POST' action='')
+            div.form-group
+                input#categoryid.form-control(type='hidden', name='categoryid', required='true', value=category._id)
+                button.btn.delete-btn(type='submit') Delete
