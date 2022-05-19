@@ -124,10 +124,10 @@ exports.category_delete_get = function(req, res, next) {
 exports.category_delete_post = function(req, res, next) {
     async.parallel({
         category: function(callback) {
-            Category.findById(req.body.categryid).exec(callback)
+            Category.findById(req.body.categoryid).exec(callback)
         },
         category_components: function(callback) {
-            Components.find({ 'category':req.body.categoryid }).exec(callback)
+            Components.find({ 'category': req.body.categoryid }).exec(callback)
         },
     }, function(err, results) {
         if (err) { return next(err); }
@@ -147,12 +147,12 @@ exports.category_delete_post = function(req, res, next) {
                 req.body.categoryid,
                 function deleteCategory(err) {
                     if(err) { return next(err); }
+                    // Success - go to category list
                     res.redirect('/categories')
                 })
         }
     }
     )
-    res.send('NOT IMPLEMENTED: Category delete POST');
 };
 
 // Display category update form on GET.
