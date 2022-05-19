@@ -146,27 +146,32 @@ exports.component_create_post = [
 
 // Display component delete form on GET.
 exports.component_delete_get = function(req, res, next) {
-    async.parallel({
-        component: function(callback) {
-            Components.findById(req.params.id).exec(callback)
-        },
-    }, function(err, results) {
-        if (err) { return next(err); }
-        if (results.component==null) {
-            res.redirect('/components');
-        }
-        res.render('component_delete', { 
-            title: 'Delete Component',
-            component: results.component,
-        });
-    }
-    )
+    Components.findById(req.params.id)
+        .populate('name')
+        .exec(function(err, components) {
+            if(err) { return next(err); }
+            if(components==null) {
+                res.redirect('/components');
+            }
+            res.render('component_delete', {
+                title: 'Delete Component',
+                components: components
+            })
+        })
 };
 
 // Handle component delete on POST.
 exports.component_delete_post = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: component delete POST');
+    Components.findByIdAndRemove(
+        req.body.componentid, 
+        function deleteComponent(err) {
+            if(err) { return next(err); }
+            //Success. so redirect to component list
+            res.redirect('/components');
+    });
 };
+    
+
 
 // Display component update form on GET.
 exports.component_update_get = function(req, res, next) {
