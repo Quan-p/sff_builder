@@ -4,6 +4,8 @@ block content
   h1 Category: #{title}
   p
     a(href=category.url+'/delete') Delete Category
+  p
+    a(href=category.url+'/update') Update Category
   p #{description}
     ul
     each component in category_components
