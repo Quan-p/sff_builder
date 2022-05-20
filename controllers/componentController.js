@@ -202,6 +202,64 @@ exports.component_update_get = function(req, res, next) {
 };
 
 // Handle component update on POST.
-exports.component_update_post = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: component update POST');
-};
+exports.component_update_post = [
+    body("name", "Name must be at least 3 characters in length")
+        .trim()
+        .isLength({ min: 3 })
+        .escape(),
+    body("category", "Category must not be empty").trim().escape(),    
+    body("description").trim().escape(),
+    body("stock", "Stock cannot be lower than 0").isInt({ min: 0, max: 9999 }),
+    body("price", "Price must be between $0 and $999999").isFloat({
+        min: 0,
+        max: 999999,
+    }),
+
+    (req, res, next) => {
+    // Extract the validation errors from a request.
+        const errors = validationResult(req);
+    // Create a component object with escaped/trimmed data and old id.
+        const component = new Components({
+            name: req.body.name,
+            category: req.body.category,
+            price: req.body.price,
+            stock: req.body.stock,
+            description: req.body.description,
+            link: req.body.link,
+            _id: req.params.id
+        });
+        if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values and error messages.
+           async.parallel(
+            {
+            categories: function(callback) {
+                Category.find(callback);
+            },
+        },
+        function(err, results) {
+            if (err) return next(err);
+            res.render('component_form', {
+                title: 'Update Component',
+                component: component,
+                categories: results.categories,
+                errors: errors.array(),
+            });
+        }
+        );
+        return;
+       } else {
+           // Data is valid, update
+           Components.findByIdAndUpdate(
+               req.params.id, 
+               component, 
+               {}, 
+               function(err, thecomponent) {
+               if(err) { return next(err); }
+               res.redirect(thecomponent.url)
+           });
+       }
+        
+    
+    
+    }
+];
