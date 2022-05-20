@@ -175,7 +175,30 @@ exports.component_delete_post = function(req, res, next) {
 
 // Display component update form on GET.
 exports.component_update_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: component update GET');
+    async.parallel({
+        component: function(callback) {
+            Components.findById(req.params.id)
+            .populate('category')
+            .exec(callback);
+        },
+        categories: function(callback) {
+            Category.find()
+            .exec(callback);
+        }
+    }, function (err, results) {
+        if(err) return next(err);
+        if(results.component == null) {
+            let err = new Error('Component not found, it may be deleted or does not exist');
+            err.status = 404;
+            return next(err);
+        }
+        res.render('component_form', {
+            title: 'Update Component',
+            component: results.component,
+            categories: results.categories,
+        });
+    }
+    )
 };
 
 // Handle component update on POST.
