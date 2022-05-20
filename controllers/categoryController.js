@@ -175,6 +175,42 @@ exports.category_update_get = function(req, res, next) {
 };
 
 // Handle category update on POST.
-exports.category_update_post = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: Category update POST');
-};
+    exports.category_update_post = [
+        body('title')
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage('Category must be given a name'),
+        body('description').optional({ checkFalsy: true }),
+
+        (req, res, next) => {
+            const errors = validationResult(req);
+
+            var category = new Category(
+                {
+                    title: req.body.title,
+                    description: req.body.description,
+                    _id: req.params.id,
+                }
+                
+            );
+            if (!errors.isEmpty()) {
+                 // There are errors. Render the form again with sanitized values and error messages.
+                res.render('category_form', { 
+                    title: 'Update Category', 
+                    category: category, 
+                    errors: errors.array() 
+                });
+                return;
+            } else {
+                // Data is valid, update
+                Category.findByIdAndUpdate(
+                    req.params.id, 
+                    category, 
+                    {}, 
+                    function(err, thecategory) {
+                    if(err) { return next(err); }
+                    res.redirect(thecategory.url)
+                });
+            }
+        }
+];
