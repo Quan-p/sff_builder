@@ -157,7 +157,21 @@ exports.category_delete_post = function(req, res, next) {
 
 // Display category update form on GET.
 exports.category_update_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED: Category update GET');
+    async.parallel({
+        category: function(callback) {
+            Category.findById(req.params.id).populate('title').populate('description').exec(callback);
+        }
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.category==null) {
+            var err = new Error('Category not found');
+            err.status = 404;
+            return next(err);
+        }
+        res.render('category_form', { title: 'Update Category',  category: results.category, description: results.category.description });
+    }
+    )
+    
 };
 
 // Handle category update on POST.
