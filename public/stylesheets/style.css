@@ -10,7 +10,6 @@ body {
 a {
   text-decoration: none;
   color: inherit;
-  pointer-events: none;
 }
 
 /* Header */
@@ -24,6 +23,17 @@ header {
   color: white;
   text-align: left;
   font-size: 42px;
+  cursor: pointer;
+}
+
+.header-title:hover {
+  color: #45A29E;
+  transition: 0.5s;
+}
+
+.header-title a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .navbar {
@@ -31,14 +41,20 @@ header {
 }
 
 .navbar li {
+  text-decoration: none;
   list-style: none;
   font-size: 28px;
   color: #45A29E;
   cursor: pointer;
 }
 
+.navbar li a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .navbar li:hover {
   color: white;
-  transition: color 1s;
+  transition: color 0.5s;
 }
 
