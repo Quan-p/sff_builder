@@ -4,9 +4,16 @@ block content
   h1= title
   
   table  
-    th Component 
-    th Selection 
-    th Price 
-    th Buy
-    th Remove
+    thead
+        th Component 
+        th Selection 
+        th Price 
+        th Buy
+        th Remove
+    tbody 
+        each category in categories
+            tr 
+                td
+                    a(href=category.url) #{category.title}
+
     

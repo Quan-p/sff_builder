@@ -1,7 +1,9 @@
 var express = require('express');
 const res = require('express/lib/response');
 var router = express.Router();
+var async = require("async");
 
+var Category = require('../models/category');
 //Require controller modules
 var category_controller = require('../controllers/categoryController');
 var component_controller = require('../controllers/componentController');
@@ -13,7 +15,22 @@ router.get('/', function (req, res) {
 
 // CATEGORY ROUTES //
 router.get('/list', function (req, res, next) {
-  res.render('list', {title: 'Test'})
+  async.parallel({
+    categories: function(callback) {
+      Category.find(callback);
+    }
+  },
+  async function (err, results) {
+    if (err) return next(err);
+    res.render('list', {
+      title: 'My Parts List',
+      categories: results.categories
+    })
+  }
+  )
+
+  
+  
 });
 
 // GET request for creating Category. NOTE This must come before route for id (i.e. display category).
