@@ -38,6 +38,7 @@ header {
 
 .navbar {
   margin-bottom: 0px;
+  padding: 0;
 }
 
 .navbar li {
@@ -58,3 +59,8 @@ header {
   transition: color 0.5s;
 }
 
+/* Homepage */
+.home-header {
+  width: 100%;
+  text-align: center;
+}
