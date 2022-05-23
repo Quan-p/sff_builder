@@ -1,17 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
 body {
   display: flex;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Oswald', sans-serif;
   flex-direction: column;
-}
-
-.navbar {
-  list-style: none;
+  background-color: #A8D0E6;
 }
 
 a {
-  color: red;
+  text-decoration: none;
+  color: inherit;
+  pointer-events: none;
 }
 
+/* Header */
 header {
-  margin: 40px;
+  padding: 40px;
+  background-color: none;
+  background-color: #24305E;
 }
+
+.header-title {
+  color: white;
+  text-align: left;
+  font-size: 42px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.navbar li {
+  list-style: none;
+  font-size: 28px;
+  color: #45A29E;
+  cursor: pointer;
+}
+
+.navbar li:hover {
+  color: white;
+  transition: color 1s;
+}
+
