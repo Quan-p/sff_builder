@@ -64,3 +64,8 @@ header {
   width: 100%;
   text-align: center;
 }
+
+.sff-components {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

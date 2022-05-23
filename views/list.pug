@@ -2,15 +2,14 @@ extends layout
 
 block content
     h1.home-header= title
-  
+        h2 Component 
+        div.sff-components
+            each category in categories
+                div.component-grid
+                    a(href=category.url) #{category.title}
     table.sff-parts
-            th Component 
-                each category in categories
-                    tr 
-                        td
-                            a(href=category.url) #{category.title}
-            th Parts
-                each component in components 
-                    tr 
-                        td 
-                            a(href=component.url) #{component.name}        
+        th Parts
+            each component in components 
+                tr 
+                    td 
+                        a(href=component.url) #{component.name}        
