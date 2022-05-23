@@ -3,17 +3,15 @@ extends layout
 block content
   h1= title
   
-  table  
-    thead
+  table.homeLists
         th Component 
-        th Selection 
-        th Price 
-        th Buy
-        th Remove
-    tbody 
-        each category in categories
-            tr 
-                td
-                    a(href=category.url) #{category.title}
-
-    
+            each category in categories
+                tr 
+                    td
+                        a(href=category.url) #{category.title}
+        th Parts
+            each component in components 
+                tr 
+                    td 
+                        a(href=component.url) #{component.name}        
+        

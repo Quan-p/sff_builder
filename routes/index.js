@@ -4,6 +4,7 @@ var router = express.Router();
 var async = require("async");
 
 var Category = require('../models/category');
+var Components = require('../models/component');
 //Require controller modules
 var category_controller = require('../controllers/categoryController');
 var component_controller = require('../controllers/componentController');
@@ -18,13 +19,17 @@ router.get('/list', function (req, res, next) {
   async.parallel({
     categories: function(callback) {
       Category.find(callback);
-    }
+    },
+    components: function(callback) {
+      Components.find(callback)
+    },
   },
   async function (err, results) {
     if (err) return next(err);
     res.render('list', {
       title: 'My Parts List',
-      categories: results.categories
+      categories: results.categories,
+      components: results.components
     })
   }
   )
