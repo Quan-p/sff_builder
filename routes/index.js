@@ -27,7 +27,7 @@ router.get('/list', function (req, res, next) {
   async function (err, results) {
     if (err) return next(err);
     res.render('list', {
-      title: 'My Parts List',
+      title: 'SFF Parts',
       categories: results.categories,
       components: results.components
     })
