@@ -1,17 +1,16 @@
 extends layout
 
 block content
-  h1= title
+    h1.home-header= title
   
-  table.homeLists
-        th Component 
-            each category in categories
-                tr 
-                    td
-                        a(href=category.url) #{category.title}
-        th Parts
-            each component in components 
-                tr 
-                    td 
-                        a(href=component.url) #{component.name}        
-        
+    table.sff-parts
+            th Component 
+                each category in categories
+                    tr 
+                        td
+                            a(href=category.url) #{category.title}
+            th Parts
+                each component in components 
+                    tr 
+                        td 
+                            a(href=component.url) #{component.name}        
