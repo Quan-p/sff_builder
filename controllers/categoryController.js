@@ -3,11 +3,6 @@ var Components = require('../models/component');
 const { body,validationResult, sanitize } = require('express-validator');
 var async = require('async');
 
-exports.list = function(req, res, next) {
-    
-    res.render('list', { title: 'Part List' });
-};
-
 // Display list of all categories.
 exports.category_list = function(req, res, next) {
     Category.find({}, 'title')
