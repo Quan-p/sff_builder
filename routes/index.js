@@ -1,4 +1,5 @@
 var express = require('express');
+const res = require('express/lib/response');
 var router = express.Router();
 
 //Require controller modules
@@ -11,7 +12,9 @@ router.get('/', function (req, res) {
 });
 
 // CATEGORY ROUTES //
-router.get('/list', category_controller.list);
+router.get('/list', function (req, res, next) {
+  res.render('list', {title: 'Test'})
+});
 
 // GET request for creating Category. NOTE This must come before route for id (i.e. display category).
 router.get("/category/create", category_controller.category_create_get);
