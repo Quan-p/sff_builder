@@ -5,10 +5,7 @@ body {
   font: 14px 'Oswald', sans-serif;
   flex-direction: column;
   background-color: #A8D0E6;
-}
-
-.container-fluid {
-  height: fit-content;
+  height: 100vh;
 }
 
 a {
