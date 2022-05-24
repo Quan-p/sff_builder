@@ -8,6 +8,10 @@ body {
   height: 100vh;
 }
 
+.container-fluid {
+  height: 100%;
+}
+
 a {
   text-decoration: none;
   color: inherit;
