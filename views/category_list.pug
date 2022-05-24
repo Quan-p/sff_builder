@@ -1,14 +1,14 @@
 extends layout 
 
 block content  
-    h1= title 
-    p This is a list of all the categories
-    p 
-    a(href='/category/create') Create Category
-    ul
-    each category in category_list
-      li
-        a(href=category.url) #{category.title}
-
-    else
-      li There are no categories.
+    h2= title 
+    p.page-desc This is a list of all the categories
+    
+    div.category-content
+      a.create-link(href='/category/create') + Create Category
+      ul.content-list
+        each category in category_list
+          li.category-items
+            a(href=category.url) #{category.title}
+        else
+          li There are no categories.
