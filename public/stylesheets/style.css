@@ -7,6 +7,10 @@ body {
   background-color: #A8D0E6;
 }
 
+.container-fluid {
+  height: fit-content;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -107,7 +111,6 @@ header {
 
 /* Footer */
 footer {
-  bottom: 0;
   width: 100%;
   background-color: #24305E;
   color: white;
