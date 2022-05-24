@@ -1,16 +1,18 @@
 extends layout 
 
 block content
-  h1 Category: #{title}
-  p
-    a(href=category.url+'/delete') Delete Category
-  p
-    a(href=category.url+'/update') Update Category
-  p #{description}
-    ul
-    each component in category_components
-        li
-            a(href=component.url) #{component.name}
-    else
-        li There are no components. 
+  h2 Category: #{title}
+  div.crud-container
+    p
+      a.crud-link(href=category.url+'/delete') Delete Category
+    p
+      a.crud-link(href=category.url+'/update') Update Category
+  p.description #{description}
+  div.list-container
+    ul.content-list
+      each component in category_components
+          li.render-items
+              a(href=component.url) #{component.name}
+      else
+          li There are no components. 
     

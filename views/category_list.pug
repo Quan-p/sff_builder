@@ -5,10 +5,10 @@ block content
     p.page-desc This is a list of all the categories
     
     div.category-content
-      a.create-link(href='/category/create') + Create Category
+      a.crud-link(href='/category/create') + Create Category
       ul.content-list
         each category in category_list
-          li.category-items
+          li.render-items
             a(href=category.url) #{category.title}
         else
           li There are no categories.
