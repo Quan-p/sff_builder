@@ -2,14 +2,12 @@
 
 body {
   display: flex;
+  flex-direction:column; 
   font: 14px 'Oswald', sans-serif;
   flex-direction: column;
   background-color: #A8D0E6;
   height: 100vh;
-}
-
-.container-fluid {
-  height: 100%;
+  margin: 0;
 }
 
 a {
@@ -113,6 +111,7 @@ header {
 /* Footer */
 footer {
   width: 100%;
+  margin-top:auto; 
   background-color: #24305E;
   color: white;
 }
