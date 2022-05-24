@@ -69,3 +69,7 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
+#hero-img {
+  width: 100%;
+}
