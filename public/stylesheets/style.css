@@ -15,7 +15,6 @@ a {
 /* Header */
 header {
   padding: 40px;
-  background-color: none;
   background-color: #24305E;
 }
 
@@ -72,4 +71,61 @@ header {
 
 #hero-img {
   width: 100%;
+}
+
+/* Footer */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #24305E;
+  color: white;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer-list li {
+  text-decoration: none;
+  list-style: none;
+  font-size: 14px;
+  color: #45A29E;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.footer-list li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-list li:hover {
+  color: white;
+  transition: color 0.5s;
+}
+
+.credit {
+  text-align: center;
+}
+
+.credit a {
+  text-decoration: none;
+}
+
+.credit a:hover {
+  color: #45A29E;
+  transition: color 0.5s;
 }
