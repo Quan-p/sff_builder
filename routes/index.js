@@ -27,15 +27,12 @@ router.get('/list', function (req, res, next) {
   async function (err, results) {
     if (err) return next(err);
     res.render('list', {
-      title: 'SFF Parts',
+      title: 'Current Inventory',
       categories: results.categories,
       components: results.components
     })
   }
   )
-
-  
-  
 });
 
 // GET request for creating Category. NOTE This must come before route for id (i.e. display category).

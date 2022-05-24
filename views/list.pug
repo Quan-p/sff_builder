@@ -1,15 +1,10 @@
 extends layout
 
 block content
+    
+    p.intro Keep track of multiple different small form factor PC parts for your store.
+    img#hero-img(src='images/sff-hero.jpg', alt='some-img')
     h1.home-header= title
-        h2 Component 
-        div.sff-components
-            each category in categories
-                div.component-grid
-                    a(href=category.url) #{category.title}
-    table.sff-parts
-        th Parts
-            each component in components 
-                tr 
-                    td 
-                        a(href=component.url) #{component.name}        
+    div.counters
+        h4 Categories: #{categories.length} 
+        h4 Parts: #{components.length} 
