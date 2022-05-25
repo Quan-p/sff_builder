@@ -62,11 +62,27 @@ header {
 }
 
 /* Homepage */
+.home-container {
+  display: flex;
+}
+
+.left-container {
+  flex: 1;
+}
+
+.right-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .home-header {
   width: 100%;
   text-align: center;
   margin: 10px;
-  font-size: 28px;
+  font-size: 40px;
 }
 
 .intro {
@@ -81,26 +97,27 @@ header {
 }
 
 #hero-img {
-  width: 100%;
+  width: 80%;
   border-radius: 8px;
   box-shadow: 2px 2px 4px #00000075;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .counters {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
-  margin-left: 145px;
-  margin-right: 145px;
-  margin-bottom: 15px;
-  
+  flex-direction: column;
 }
 
 .counters h4 {
   border: 1px solid #24305E;
   padding: 10px;
   border-radius: 10px;
+  font-size: 32px;
 }
 
 .counters h4:hover {

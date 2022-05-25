@@ -1,10 +1,12 @@
 extends layout
 
 block content
-    
-    p.intro Keep track of multiple different small form factor PC parts for your store.
-    img#hero-img(src='images/sff-hero.jpg', alt='some-img')
-    h1.home-header= title
-    div.counters
-        h4 Categories: #{categories.length} 
-        h4 Parts: #{components.length} 
+    div.home-container
+        div.left-container
+            p.intro Keep track of multiple different small form factor PC parts for your store.
+            img#hero-img(src='images/sff-hero.jpg', alt='some-img')
+        div.right-container
+            h1.home-header= title
+            div.counters
+                h4 Categories: #{categories.length} 
+                h4 Parts: #{components.length} 
