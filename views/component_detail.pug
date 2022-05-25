@@ -1,23 +1,27 @@
 extends layout 
 
 block content
-    h1 #{name} #{title}
+    h2 #{name} #{title}
     -
         var list = description;
         var listArr = list.split(',');
-    h3 Category
-    p #{category.title}
-    h3 Features 
-    ul(class='feature-list')
-        each feature in listArr 
-            li= feature
-    p Price $#{price}
-    p Stock #{stock}
-    a(href=link) Buy
-    p
-    a(href=component.url+'/delete') Delete Component
-    p
-    a(href=component.url+'/update') Update Component
+    
+    div.detail-container
+        div.details
+            h3 Category
+            p #{category.title}
+            h3 Price
+            p $#{price}
+            h3 Stock
+            p #{stock}
+            a(href=link) Buy
+        ul.feature-list
+            h3 Features 
+            each feature in listArr 
+                li.feature-content= feature
+    div.crud-container
+        a.crud-link(href=component.url+'/delete') Delete Component
+        a.crud-link(href=component.url+'/update') Update Component
     
     
 
