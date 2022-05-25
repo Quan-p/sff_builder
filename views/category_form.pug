@@ -1,16 +1,16 @@
 extends layout
 
 block content
-  h1=title
+  h1.form-title=title
 
   form(method='POST' action='')
     div.form-group
-      label(for='title') Category:
-      input#category.form-control(type='text' placeholder='Category' name='title' required='true' value=(undefined===category ? '' : category.title) )
+      label(for='title') Title:
+      input#category.form-input(type='text' placeholder='Category Title' name='title' maxlength=30 required='true' value=(undefined===category ? '' : category.title) )
     div.form-group
       label(for='description') Description:
       textarea(name="description", id='description', cols="30", rows="10", maxlength: 500) #{undefined===category ? '' : category.description}
-    button.btn.btn-primary(type='submit') Submit
+      button.btn.form-change(type='submit') Submit
   if errors
     ul
       for error in errors

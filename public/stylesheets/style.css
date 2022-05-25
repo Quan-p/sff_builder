@@ -283,3 +283,108 @@ h3 {
 .feature-content {
   border-bottom: 1px solid white;
 }
+
+/* Form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  border-radius: 5px;
+  outline: none;
+  height: 50px;
+  width: 400px;
+  padding: 10px;
+  box-shadow: none;
+  border: none;
+}
+
+textarea {
+  width: 400px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: none;
+}
+
+input:focus {
+  outline: none !important;
+  border: 2px solid #F76C6C;
+  box-shadow: 0 0 10px #719ECE;
+  transition: 0.3s;
+}
+
+textarea:focus {
+  outline: none !important;
+  border: 2px solid #F76C6C;
+  box-shadow: 0 0 10px #719ECE;
+  transition: 0.3s;
+}
+
+.form-change {
+  width: 400px;
+  height: 60px;
+  font-size: 28px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  margin: 30px;
+  cursor: pointer;
+  background-color: #F8E9A1;
+}
+
+label {
+  font-size: 30px;
+}
+
+.form-title {
+  text-align: center;
+  margin: 24px;
+}
+
+.form-subtitle {
+  text-align: center;
+  margin: 10px;
+  font-size: 36px;
+}
+
+.del-check {
+  text-align: center;
+  font-size: 32px;
+}
+
+.del-list {
+  text-align: center;
+  font-size: 28px;
+}
+
+select {
+  width: 400px;
+  height: 60px;
+  font-size: 28px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  margin: 30px;
+  cursor: pointer;
+  background-color: white;
+}
+
+/* Create Component */
+.create-container {
+  display: flex;
+}
+
+.left-form {
+  flex: 1;
+}
+
+.right-form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
