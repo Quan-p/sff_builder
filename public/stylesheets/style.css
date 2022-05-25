@@ -372,19 +372,23 @@ select {
   background-color: white;
 }
 
-/* Create Component */
-.create-container {
-  display: flex;
-}
-
-.left-form {
-  flex: 1;
-}
-
-.right-form {
-  flex: 1;
+#component-del {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+}
+
+.buy-btn {
+  font-size: 18px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #F8E9A1;
+  padding: 8px 20px;
+}
+
+.buy-btn:hover {
+  color: #374785;
+  text-decoration: none;
 }
